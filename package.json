@@ -1,0 +1,11 @@
+{
+  "name": "cool-task-manager",
+  "version": "1.0.0",
+  "description": "Eine umfassende Projekt- und Task-Management PWA",
+  "scripts": {
+    "deploy": "gh-pages -d ."
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.0"
+  }
+}

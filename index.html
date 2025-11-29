@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Eine umfassende Projekt- und Task-Management App"
+    />
+    <meta name="theme-color" content="#0284c7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Task Manager" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Cool Task Manager - Projekt Management App</title>
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <h1 class="logo">Task Manager</h1>
+          <p class="logo-subtitle">Projekt Management</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#dashboard" class="nav-item active" data-page="dashboard">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+          <a href="#projects" class="nav-item" data-page="projects">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+              ></path>
+            </svg>
+            <span>Projekte</span>
+          </a>
+          <a href="#kanban" class="nav-item" data-page="kanban">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+              ></path>
+            </svg>
+            <span>Kanban</span>
+          </a>
+          <a href="#list" class="nav-item" data-page="list">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+            <span>Liste</span>
+          </a>
+          <a href="#calendar" class="nav-item" data-page="calendar">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
+            <span>Kalender</span>
+          </a>
+          <a href="#tasks" class="nav-item" data-page="tasks">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+            <span>Aufgaben</span>
+          </a>
+          <a href="#notifications" class="nav-item" data-page="notifications">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              ></path>
+            </svg>
+            <span>Benachrichtigungen</span>
+            <span id="notification-badge" class="badge hidden">0</span>
+          </a>
+          <a href="#settings" class="nav-item" data-page="settings">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              ></path>
+            </svg>
+            <span>Einstellungen</span>
+          </a>
+        </nav>
+        <div id="projects-list" class="projects-list"></div>
+      </aside>
+
+      <div class="main-content">
+        <header class="header">
+          <div class="header-search">
+            <svg
+              class="search-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Suchen..."
+              class="search-input"
+            />
+          </div>
+          <div class="header-actions">
+            <button id="theme-toggle" class="icon-btn" title="Theme wechseln">
+              <svg
+                class="icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                ></path>
+              </svg>
+            </button>
+            <a
+              href="#notifications"
+              class="icon-btn notification-btn"
+              id="notification-btn"
+            >
+              <svg
+                class="icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                ></path>
+              </svg>
+              <span id="header-notification-badge" class="badge hidden">0</span>
+            </a>
+            <div class="user-menu">
+              <div class="user-avatar">M</div>
+              <div class="user-info">
+                <p class="user-name">Max Mustermann</p>
+                <p class="user-email">max@example.com</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="content" id="content">
+          <div id="dashboard-page" class="page active">
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">
+              Übersicht über deine Projekte und Aufgaben
+            </p>
+            <div id="dashboard-stats" class="stats-grid"></div>
+            <div class="dashboard-grid">
+              <div class="card">
+                <h2 class="card-title">Letzte Aufgaben</h2>
+                <div id="recent-tasks" class="task-list"></div>
+              </div>
+              <div class="card">
+                <h2 class="card-title">Aktivitäten</h2>
+                <div id="recent-activities" class="activity-list"></div>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="card-title">Projektübersicht</h2>
+              <div id="projects-overview" class="projects-grid"></div>
+            </div>
+          </div>
+
+          <div id="projects-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Projekte</h1>
+                <p class="page-subtitle">Verwalte alle deine Projekte</p>
+              </div>
+              <button class="btn btn-primary" id="new-project-btn">
+                <svg
+                  class="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+                Neues Projekt
+              </button>
+            </div>
+            <div id="projects-container" class="projects-container"></div>
+          </div>
+
+          <div id="kanban-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Kanban Board</h1>
+                <p class="page-subtitle">
+                  Verwalte deine Aufgaben im Kanban-Stil
+                </p>
+              </div>
+              <button class="btn btn-primary" id="new-task-btn">
+                <svg
+                  class="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+                Neue Aufgabe
+              </button>
+            </div>
+            <div id="kanban-board" class="kanban-board"></div>
+          </div>
+
+          <div id="list-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Aufgabenliste</h1>
+                <p class="page-subtitle">Alle Aufgaben in Listenansicht</p>
+              </div>
+              <button class="btn btn-primary" id="new-task-list-btn">
+                <svg
+                  class="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+                Neue Aufgabe
+              </button>
+            </div>
+            <div class="filters">
+              <input
+                type="text"
+                id="list-search"
+                placeholder="Suchen..."
+                class="input"
+              />
+              <select id="status-filter" class="input">
+                <option value="all">Alle Status</option>
+                <option value="todo">Zu erledigen</option>
+                <option value="in-progress">In Bearbeitung</option>
+                <option value="review">Review</option>
+                <option value="done">Erledigt</option>
+              </select>
+              <select id="priority-filter" class="input">
+                <option value="all">Alle Prioritäten</option>
+                <option value="urgent">Dringend</option>
+                <option value="high">Hoch</option>
+                <option value="medium">Mittel</option>
+                <option value="low">Niedrig</option>
+              </select>
+            </div>
+            <div id="list-container" class="list-container"></div>
+          </div>
+
+          <div id="calendar-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Kalender</h1>
+                <p class="page-subtitle">Aufgaben nach Fälligkeitsdatum</p>
+              </div>
+              <button class="btn btn-primary" id="new-task-calendar-btn">
+                <svg
+                  class="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+                Neue Aufgabe
+              </button>
+            </div>
+            <div id="calendar-container" class="calendar-container"></div>
+          </div>
+
+          <div id="tasks-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Aufgaben</h1>
+                <p class="page-subtitle">Alle Aufgaben verwalten</p>
+              </div>
+              <button class="btn btn-primary" id="new-task-tasks-btn">
+                <svg
+                  class="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+                Neue Aufgabe
+              </button>
+            </div>
+            <div id="tasks-container" class="tasks-container"></div>
+          </div>
+
+          <div id="notifications-page" class="page">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Benachrichtigungen</h1>
+                <p class="page-subtitle" id="notifications-subtitle">
+                  Alle Benachrichtigungen gelesen
+                </p>
+              </div>
+              <button class="btn btn-secondary" id="mark-all-read-btn">
+                Alle als gelesen markieren
+              </button>
+            </div>
+            <div
+              id="notifications-container"
+              class="notifications-container"
+            ></div>
+          </div>
+
+          <div id="settings-page" class="page">
+            <h1 class="page-title">Einstellungen</h1>
+            <p class="page-subtitle">Verwalte deine App-Einstellungen</p>
+            <div id="settings-container" class="settings-container"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div id="task-modal" class="modal hidden">
+        <div class="modal-header">
+          <h2 id="modal-title">Neue Aufgabe</h2>
+          <button class="modal-close" id="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="task-form">
+            <input type="hidden" id="task-id" />
+            <div class="form-group">
+              <label>Titel *</label>
+              <input type="text" id="task-title" class="input" required />
+            </div>
+            <div class="form-group">
+              <label>Beschreibung</label>
+              <textarea id="task-description" class="input" rows="4"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Status</label>
+                <select id="task-status" class="input">
+                  <option value="todo">Zu erledigen</option>
+                  <option value="in-progress">In Bearbeitung</option>
+                  <option value="review">Review</option>
+                  <option value="done">Erledigt</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Priorität</label>
+                <select id="task-priority" class="input">
+                  <option value="low">Niedrig</option>
+                  <option value="medium">Mittel</option>
+                  <option value="high">Hoch</option>
+                  <option value="urgent">Dringend</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Projekt</label>
+                <select id="task-project" class="input" required></select>
+              </div>
+              <div class="form-group">
+                <label>Zugewiesen an</label>
+                <select id="task-assignee" class="input">
+                  <option value="">Nicht zugewiesen</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Fälligkeitsdatum</label>
+                <input type="date" id="task-due-date" class="input" />
+              </div>
+              <div class="form-group">
+                <label>Geschätzte Stunden</label>
+                <input
+                  type="number"
+                  id="task-hours"
+                  class="input"
+                  min="0"
+                  step="0.5"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tags</label>
+              <div id="task-tags" class="tags-container"></div>
+              <input
+                type="text"
+                id="new-tag"
+                class="input"
+                placeholder="Tag hinzufügen..."
+              />
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-secondary" id="cancel-task">
+                Abbrechen
+              </button>
+              <button type="submit" class="btn btn-primary">Speichern</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="project-modal" class="modal hidden">
+        <div class="modal-header">
+          <h2 id="project-modal-title">Neues Projekt</h2>
+          <button class="modal-close" id="close-project-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="project-form">
+            <input type="hidden" id="project-id" />
+            <div class="form-group">
+              <label>Projektname *</label>
+              <input type="text" id="project-name" class="input" required />
+            </div>
+            <div class="form-group">
+              <label>Beschreibung</label>
+              <textarea
+                id="project-description"
+                class="input"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label>Farbe</label>
+              <div id="color-picker" class="color-picker"></div>
+            </div>
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancel-project"
+              >
+                Abbrechen
+              </button>
+              <button type="submit" class="btn btn-primary">Erstellen</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    <script>
+      // Service Worker Registration
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          const swPath = window.location.pathname.includes("/Cool-APP/")
+            ? "/Cool-APP/sw.js"
+            : "./sw.js";
+          navigator.serviceWorker
+            .register(swPath)
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
